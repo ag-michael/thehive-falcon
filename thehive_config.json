@@ -1,0 +1,26 @@
+{
+    "Verify_SSL": true,
+    "defaultCaseTemplate": "Falcon detection playbook",
+    "observable_map": {
+        "CommandLine": {
+            "dataType": "commandline",
+            "message": "Command Line"
+        },
+	"ComputerName": {
+            "dataType": "hostname",
+            "message": "Computer Name"
+        },
+	"FileName": {
+            "dataType": "filename",
+            "message": "Triggering File Name"
+        },
+	"SHA256String": {
+            "dataType": "hash",
+            "message": "Triggering SHA256 hash"
+        }
+    },
+    "thehiveapi": "<api key for thehive>",
+    "thehiveurl": "<url to your instance of thehive>/api/alert"
+}
+
+
