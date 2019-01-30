@@ -1,0 +1,25 @@
+[Unit]
+Description=Falcon streaming api alerting for TheHive
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+WorkingDirectory=/opt/thehive-falcon/
+
+User=nobody
+Group=nobody
+
+ExecStart=/bin/python /opt/thehive-falcon/thehive_falcon.py /opt/thehive-falcon/falcon_config.json /opt/thehive-falcon/thehive_config.json
+
+StandardOutput=syslog
+StandardError=syslog
+
+LimitNOFILE=10000
+
+TimeoutStopSec=0
+
+KillSignal=SIGKILL
+
+[Install]
+WantedBy=multi-user.target
+
