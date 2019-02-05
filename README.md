@@ -1,6 +1,18 @@
 # thehive-falcon
 thehive-falcon is a Crowdstrike Falcon streaming api alert integration script for TheHive. 
 
+## Features
+
+- Alert creation for TheHive
+- Granular black/white list support (see included white/black lists for reference). 
+- Email alerting 
+- Elasticsearch logging of streaming data 
+
+## Requirements 
+
+`elasticsearch` is required for elasticsearch logging. 
+`smtplib` is  a requirement for email alerting. 
+
 
 ## Usage
 
