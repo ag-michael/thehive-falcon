@@ -1,0 +1,44 @@
+{"blacklist": [
+        
+            {
+                "name": "Servers", 
+                "selectors": {
+                    "ComputerName": [
+                        {
+                            "type": "regex", 
+                            "value": "(PROD|DEV|TEST).*"
+                        },
+			{"type":"text","value":"DMZGATEWAY"}
+
+                    ]
+                }, 
+                "severity": "high"
+            }, 
+            {
+                "name": "Admin user detection blacklist", 
+                "selectors": {
+                    "UserName": [
+                        {
+                            "type": "regex", 
+                            "value": "adm\\..*"
+                        } 
+                    ]
+                }, 
+                "severity": "high"
+            },
+            {
+                "name": "Blacklisted users", 
+                "selectors": {
+                    "UserName": [
+                        {
+                            "type": "file", 
+                            "value": "/opt/thehive-falcon/blacklisted-users.txt"
+                        } 
+                    ]
+                }, 
+                "severity": "high"
+            }
+        
+    ]
+}
+

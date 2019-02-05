@@ -4,6 +4,8 @@
 	"falcon_data_feed_url":"https://firehose.crowdstrike.com/sensors/entities/datafeed/v1?appId=",
 	"falcon_api_id":"<apiid>",
 	"falcon_api_key":"<apikey>"
+        "Elasticsearch_logging":false,
+        "Elasticsearch":{"index":"falconstreamingapi","hosts":"127.0.0.1","doctype":"falconstreaming"}
 
 
 }

@@ -2,6 +2,12 @@
     "Verify_SSL": true,
     "defaultCaseTemplate": "default playbook",
     "tag_fields":["DetectName","Tactic","Technique","Objective"],
+    "email_alerts":false,
+    "email_notify":["user1@corp.com","security@corp.com"],
+    "email_from":"thehiveapi@corp.com",
+    "email_server":"email.corp.com",
+    "whitelist_config":"./whitelist.json",
+    "blacklist_config":"./blacklist.json",
     "observable_map": {
         "CommandLine": {
             "dataType": "commandline",

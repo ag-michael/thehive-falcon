@@ -1,0 +1,22 @@
+{"whitelist": [
+        
+		{ 
+			"name":"Adware sha256 detection whitelist",
+			"selectors":{
+				"DetectDescription":[{"type":"text","value":"This file is classified as Adware/PUP based on its SHA256 hash."}]
+			},
+			"severity":"low"
+		},
+		{ 
+			"name":"Adware Tactic and tehcnique whitelist",
+			"selectors":{
+				"Tactic":[{"type":"text","value":"Malware"}],
+				"Technique":[{"type":"text","value":"Adware"}]
+			},
+			"severity":"low"
+		}
+
+        
+    ]
+}
+
