@@ -17,7 +17,35 @@ import logging
 import sys
 from requests import Request, Session
 
+class FalconAuth:
+    def __init__(self,client_id,client_secret):
+        self.client_id=client_id
+        self.client_secret=client_secret
+        with open("OAuth2.json","w+") as f:
+        	f.write("")
+    def newtoken(self):
+        response=requests.post("https://api.crowdstrike.com/oauth2/token",data={"client_id":self.client_id,"client_secret":self.client_secret},
+            headers={"Content-Type":"application/x-www-form-urlencoded","Accept":"application/json"})
+        if not response.status_code==201:
+            return None
+        json_data=response.json()
+        json_data["expires"]=time.time()+json_data["expires_in"]
+        return json_data
 
+    def getToken(self):
+        tokendata=''
+        with open("OAuth2.json","r") as f:
+            try:
+                tokendata=json.loads(f.read())
+                if tokendata['expires'] < time.time()+1.0:
+                    tokendata=self.newtoken()
+            except Exception:
+                #print("Error loading oauth2 data")
+                #traceback.print_exc()
+                tokendata= self.newtoken()
+        with open("OAuth2.json","w+") as f:
+            f.write(json.dumps(tokendata))
+            return tokendata['access_token']
 class ES:
 
     def __init__(self, config, logger):
@@ -111,6 +139,7 @@ class FalconStreamingAPI:
             self.es = None
         self.key = config['falcon_api_key']
         self._id = config['falcon_api_id']
+        self.auth  = FalconAuth(self._id,self.key)
         self.Method = 'GET'
         self.md5 = ''
         self.url = config['falcon_data_feed_url'] + \
@@ -145,8 +174,7 @@ class FalconStreamingAPI:
                 self.CanonicalQueryString(self.RequestUri_Query)
             signature = self.calculateHMAC(self.key, requestString)
             self.Headers['X-CS-Date'] = self.date
-            self.Headers['Authorization'] = 'cs-hmac ' + \
-                self._id + ':' + signature + ':customers'
+            self.Headers['Authorization'] = "Bearer {}".format(self.auth.getToken())
             s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             context = ssl.create_default_context()
             c = context.wrap_socket(socket.socket(
