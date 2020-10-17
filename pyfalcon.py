@@ -145,7 +145,7 @@ class FalconStreamingAPI:
         self.url = config['falcon_data_feed_url'] + \
             '?appId=' + config['client_name']
         self.RequestUri_Host = config['falcon_hose_domain']
-        self.RequestUri_AbsolutePath = '/sensors/entities/datafeed/v1'
+        self.RequestUri_AbsolutePath = '/sensors/entities/datafeed/v2'
         self.RequestUri_Query = '?appId=' + config['client_name']
         self.Headers = {}
         self.processor = processor
@@ -181,7 +181,7 @@ class FalconStreamingAPI:
                 socket.AF_INET), server_hostname=self.config['falcon_hose_domain'])
             self.lh.debug('Connecting to Falcon streaming API using TLS.')
             c.connect((self.config['falcon_hose_domain'], 443))
-            rs = 'GET /sensors/entities/datafeed/v1?appId=' + \
+            rs = 'GET /sensors/entities/datafeed/v2?appId=' + \
                 self.config['client_name'] + ' HTTP/1.1\n'
             rs += 'X-CS-Date: ' + self.date + '\n'
             rs += 'Authorization: ' + self.Headers['Authorization'] + '\n'
